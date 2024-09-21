@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Aventure</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="icon.svg">
 </head>
+
 <body>
     <main>
-        <div class="console-box">
-            <?php foreach($arrayAssociativo->messages as $message): ?>
+        <div class="content">
+            <div class="content_text">
+                <h2>Título cena</h2>
+                <!-- <?php foreach ($arrayAssociativo->messages as $message): ?>
                 <p><?= $message ?></p>
-            <?php endforeach ?>
-            <div>
+            <?php endforeach ?> -->
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum esse quod nisi quia. Molestiae
+                    accusantium tenetur earum? Nihil pariatur assumenda repellendus delectus autem ad blanditiis unde
+                    tempore, at temporibus provident.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum esse quod nisi quia. Molestiae
+                    accusantium tenetur earum? Nihil pariatur assumenda repellendus delectus autem ad blanditiis unde
+                    tempore, at temporibus provident.</p>
+            </div>
+            <div class="form">
                 <form>
-                    <input type="text" name="command"> 
-                    <input type="submit">
+                    <input class="input_command" type="text" name="command" placeholder="Digite o comando">
+                    <input class="input_submit" type="submit">
                 </form>
             </div>
         </div>
     </main>
 </body>
+
 </html>

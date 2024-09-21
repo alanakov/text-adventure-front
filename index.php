@@ -18,8 +18,8 @@ if(isset($_GET['comando']) && ($_GET['save'])) {
 }
 
 
-$arrayAssociative = json_decode($content);
+/* $arrayAssociative = json_decode($content);
 $_SESSION['history'] = isset($_SESSION['history']) ? array_merge($_SESSION['history'], $arrayAssociative->messages) : [];
-$messages = $_SESSION['history'];
+$messages = $_SESSION['history']; */
 
-include "template.phtml";
+include "template.phtml"; 
