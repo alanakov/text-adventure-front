@@ -3,47 +3,81 @@ session_start();
 
 // Função para buscar o conteúdo a partir da rota do comando
 function buscarConteudo($command) {
-    // Usa rawurlencode para codificar corretamente o comando, incluindo espaços
     $url = "http://localhost:4567/" . rawurlencode($command);
-    
-    // Usa file_get_contents com supressão de erro e verifica se a resposta é válida
     $response = @file_get_contents($url);
 
     if ($response === FALSE) {
-        // Exibe uma mensagem de erro amigável
-        return "Erro ao processar o comando.";
+        return "Erro ao processar o comando: $command. Tente novamente mais tarde.";
+    }
+
+    // Decodifica o JSON para extrair apenas a descrição, se for o comando 'start'
+    $responseData = json_decode($response, true);
+    
+    if ($command === 'start' && isset($responseData['descricao'])) {
+        return $responseData['descricao']; // Retorna apenas a descrição da cena
     }
 
     return $response;
 }
 
 // Limpa o histórico ao recarregar a página
-if (!isset($_GET['command'])) {
-    $_SESSION['history'] = [];
-    
-    // Carrega a cena inicial se o histórico estiver vazio
-    $cenaInicialUrl = "http://localhost:4567/start";
-    $response = @file_get_contents($cenaInicialUrl);
-    $responseData = json_decode($response, true);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['command'])) {
+    $_SESSION['history'] = []; // Limpa o histórico
 
-    // Adiciona a cena inicial ao histórico
+    // Adiciona uma mensagem inicial pedindo para digitar "start"
     $_SESSION['history'][] = [
-        'command' => 'start',
-        'response' => $responseData['descricao'] ?? 'Cena inicial não encontrada.'
+        'command' => '',
+        'response' => 'Digite START para começar o jogo.'
     ];
+
+    // Limpa o último comando processado
+    unset($_SESSION['last_command']);
 }
 
-// Se um comando for enviado pelo formulário, processamos e atualizamos o histórico
+// Se um comando for enviado
 if (isset($_GET['command'])) {
-    // Captura o comando diretamente do GET e substitui + por espaço
-    $command = str_replace('+', ' ', $_GET['command']); // Decodifica os espaços
-    $response = buscarConteudo($command);
+    $command = str_replace('+', ' ', $_GET['command']);
 
-    // Salva o comando e a resposta no histórico
-    $_SESSION['history'][] = [
-        'command' => $command,
-        'response' => $response
-    ];
+    // Se o comando for "quit", limpa o histórico e exibe a mensagem de encerramento
+    if (strtolower($command) === 'quit') {
+        $_SESSION['history'] = []; // Limpa o histórico
+        $_SESSION['history'][] = [
+            'command' => $command,
+            'response' => "Saindo do jogo... Digite START para começar o jogo."
+        ];
+        $_SESSION['last_command'] = $command;
+    }
+    // Se o comando for "restart", limpa o histórico e exibe a mensagem inicial
+    elseif (strtolower($command) === 'restart') {
+        $_SESSION['history'] = []; // Limpa o histórico
+        $_SESSION['history'][] = [
+            'command' => '',
+            'response' => 'Digite START para começar o jogo.'
+        ];
+        $_SESSION['last_command'] = $command;
+    }
+    // Caso contrário, processa o comando normalmente
+    else {
+        if (!isset($_SESSION['last_command']) || $_SESSION['last_command'] !== $command) {
+            $response = buscarConteudo($command);
+
+            // Se o comando for "start", carrega a cena 1
+            if (strtolower($command) === 'start') {
+                $_SESSION['history'][] = [
+                    'command' => $command,
+                    'response' => $response
+                ];
+            } else {
+                // Processa qualquer outro comando normalmente
+                $_SESSION['history'][] = [
+                    'command' => $command,
+                    'response' => $response
+                ];
+            }
+
+            $_SESSION['last_command'] = $command;
+        }
+    }
 }
 
 include "template.phtml";
