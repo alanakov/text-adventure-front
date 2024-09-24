@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 :root {
+    --fonte-principal: 'Source Code Pro';
     --branco: white;
     --azul-escuro: #19191D;
     --azul-claro: #3572AB;
     --azul-input: #17171A;
-    --hover-botao: #1d4365;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--fonte-principal);
+    color: var(--branco);
 }
 
 body {
@@ -14,9 +21,11 @@ body {
 
 .content_text {
     margin: 2% 16% 0 16%;
-    max-height: 80vh; 
-    overflow-y: auto; 
-    padding-bottom: 10%; 
+    max-height: 700px;
+    flex: 1; 
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
 
     h2 {
         color: var(--azul-claro);
@@ -50,9 +59,4 @@ form {
     background-color: var(--azul-claro);
     padding: 1%;
     cursor: pointer;
-}
-
-.input_submit:hover {
-    background-color: var(--hover-botao);
-    transition: 05.s;
 }

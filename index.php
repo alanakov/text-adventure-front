@@ -11,7 +11,7 @@ function buscarConteudo($command) {
 
     if ($response === FALSE) {
         // Exibe uma mensagem de erro amigável
-        return "Erro ao processar o comando: $command. Tente novamente mais tarde.";
+        return "Erro ao processar o comando.";
     }
 
     return $response;
