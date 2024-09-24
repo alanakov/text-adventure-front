@@ -54,4 +54,5 @@ form {
 
 .input_submit:hover {
     background-color: var(--hover-botao);
+    transition: 05.s;
 }
