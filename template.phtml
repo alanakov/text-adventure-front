@@ -14,8 +14,6 @@
         <div class="content">
             <div id="content_text" class="content_text">
                 <h2>Jogo Text Adventure</h2>
-                
-                <!-- Exibe o conteúdo da cena inicial e o histórico -->
                 <?php if (!empty($_SESSION['history'])): ?>
                     <?php foreach ($_SESSION['history'] as $entry): ?>
                         <p><strong>Você:</strong> <?= $entry['command'] ?></p>
@@ -24,7 +22,7 @@
                         <br>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>Cena inicial: <?= $content->descricao ?></p> <!-- Exibe a descrição da cena inicial -->
+                    <p>Cena inicial: <?= $content->descricao ?></p>
                 <?php endif; ?>
             </div>
 
