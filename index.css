@@ -5,6 +5,7 @@
     --azul-escuro: #19191D;
     --azul-claro: #3572AB;
     --azul-input: #17171A;
+    --hover-botao: #061f57;
 }
 
 * {
@@ -43,12 +44,16 @@ form {
     }
 
     .input_submit {
-        width: 5%;
+        width: 6%;
         border: 0;
         border-radius: 4px;
         background-color: var(--azul-claro);
         padding: 1%;
         cursor: pointer;
+    }
+
+    .input_submit:hover {
+        background-color: var(--hover-botao);
     }
 }
 
