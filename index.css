@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+    --fonte-principal: 'Source Code Pro';
+    --branco: white;
+    --azul-escuro: #19191D;
+    --azul-claro: #3572AB;
+    --azul-input: #17171A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--fonte-principal);
+    color: var(--branco);
+}
+
+body {
+    background-color: var(--azul-escuro); 
+}
+
+.content_text {
+    margin: 2% 16% 0 16%;
+    max-height: 700px;
+    flex: 1; 
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+
+    h2 {
+        color: var(--azul-claro);
+        margin-bottom: 4%;
+    }
+}
+
+form {
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+}
+
+.input_command {
+    width: 50%;
+    border: 1px solid var(--branco);
+    background-color: var(--azul-input);
+    border-radius: 4px;
+    padding: 1%;
+}
+
+.input_submit {
+    width: 6%;
+    border: 0;
+    border-radius: 4px;
+    background-color: var(--azul-claro);
+    padding: 1%;
+    cursor: pointer;
+}
