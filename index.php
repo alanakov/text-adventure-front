@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['command'])) {
 if (isset($_GET['command'])) {
     $command = str_replace('+', ' ', $_GET['command']);
 
+    $response = buscarConteudo($command);
+
     // Se o comando for "quit", limpa o histórico e exibe a mensagem de encerramento
     if (strtolower($command) === 'quit') {
         $_SESSION['history'] = []; // Limpa o histórico
