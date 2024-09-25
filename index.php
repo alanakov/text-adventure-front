@@ -61,21 +61,11 @@ if (isset($_GET['command'])) {
     // Caso contrário, processa o comando normalmente
     else {
         if (!isset($_SESSION['last_command']) || $_SESSION['last_command'] !== $command) {
-            $response = buscarConteudo($command);
-
-            // Se o comando for "start", carrega a cena 1
-            if (strtolower($command) === 'start') {
-                $_SESSION['history'][] = [
-                    'command' => $command,
-                    'response' => $response
-                ];
-            } else {
-                // Processa qualquer outro comando normalmente
-                $_SESSION['history'][] = [
-                    'command' => $command,
-                    'response' => $response
-                ];
-            }
+            // Processa qualquer outro comando normalmente
+            $_SESSION['history'][] = [
+                'command' => $command,
+                'response' => $response
+            ];
 
             $_SESSION['last_command'] = $command;
         }
