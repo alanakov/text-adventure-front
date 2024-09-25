@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Aventure</title>
+    <title>Text Adventure</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="icon.svg">
 </head>
+
 <body>
     <main>
-        <div class="console-box">
-            <?php foreach($arrayAssociativo->messages as $message): ?>
-                <p><?= $message ?></p>
-            <?php endforeach ?>
-            <div>
-                <form>
-                    <input type="text" name="command"> 
-                    <input type="submit">
+        <div class="content">
+            <div id="content_text" class="content_text">
+                <h2>Jogo Text Adventure</h2>
+                <?php if (!empty($_SESSION['history'])): ?>
+                    <?php foreach ($_SESSION['history'] as $entry): ?>
+                        <p><strong>Você:</strong> <?= $entry['command'] ?></p>
+                        <br>
+                        <p><?= $entry['response'] ?></p>
+                        <br>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Cena inicial: <?= $content->descricao ?></p>
+                <?php endif; ?>
+            </div>
+
+            <div class="form">
+                <form method="GET" action="index.php">
+                    <input class="input_command" type="text" name="command" placeholder="Digite o comando" autocomplete="off" required>
+                    <input class="input_submit" type="submit" value="Enviar">
                 </form>
             </div>
         </div>
